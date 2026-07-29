@@ -1,7 +1,7 @@
 {
   "product": "enhanced",
   "platform": "linux",
-  "latest": "98",
+  "latest": "103",
   "stable": null,
   "builds": {
     "96": {
@@ -11,6 +11,10 @@
     "98": {
       "url": "https://downloads.cfx-services.net/prod/019fa476-84f5-7438-b85a-25b3efd137fa/cfx-server_linux_x64.tar.xz",
       "seenAt": "2026-07-29T02:25:15Z"
+    },
+    "103": {
+      "url": "https://downloads.cfx-services.net/prod/019faeab-a5fa-7020-a208-c343cb3d6ebe/cfx-server_linux_x64.tar.xz",
+      "seenAt": "2026-07-29T17:02:20Z"
     }
   }
 }
