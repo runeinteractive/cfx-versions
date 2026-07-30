@@ -1,7 +1,7 @@
 {
   "product": "enhanced",
   "platform": "win32",
-  "latest": "103",
+  "latest": "105",
   "stable": null,
   "builds": {
     "96": {
@@ -15,6 +15,10 @@
     "103": {
       "url": "https://downloads.cfx-services.net/prod/019faeab-9d10-7691-bc20-eaaadf0c6829/cfx-server_win_x64.zip",
       "seenAt": "2026-07-30T02:07:01Z"
+    },
+    "105": {
+      "url": "https://downloads.cfx-services.net/prod/019fb3d1-bed9-78ec-9023-38605db0adab/cfx-server_win_x64.zip",
+      "seenAt": "2026-07-30T19:03:01Z"
     }
   }
 }
