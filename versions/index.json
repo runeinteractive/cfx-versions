@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-04T02:13:30Z",
+  "updatedAt": "2026-08-04T17:27:19Z",
   "channels": {
     "legacy/win32": {
       "latest": "33170",
@@ -12,12 +12,12 @@
       "path": "versions/legacy/linux.json"
     },
     "enhanced/win32": {
-      "latest": "107",
+      "latest": "110",
       "stable": null,
       "path": "versions/enhanced/win32.json"
     },
     "enhanced/linux": {
-      "latest": "107",
+      "latest": "110",
       "stable": null,
       "path": "versions/enhanced/linux.json"
     }
