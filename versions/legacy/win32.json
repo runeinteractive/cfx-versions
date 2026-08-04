@@ -1,7 +1,7 @@
 {
   "product": "legacy",
   "platform": "win32",
-  "latest": "32561",
+  "latest": "33170",
   "stable": null,
   "builds": {
     "32561": {
@@ -10,7 +10,11 @@
     },
     "25770": {
       "url": "https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/25770-8ddccd4e4dfd6a760ce18651656463f961cc4761/server.zip",
-      "seenAt": "2026-08-03T02:34:25Z"
+      "seenAt": "2026-08-04T02:13:30Z"
+    },
+    "33170": {
+      "url": "https://runtime.fivem.net/artifacts/fivem/build_server_windows/feature/updated-updater-ui/33170-e1402e412fdc1c7665c34856b1f3a239af04ee5b/server.zip",
+      "seenAt": "2026-08-04T02:13:30Z"
     }
   }
 }
