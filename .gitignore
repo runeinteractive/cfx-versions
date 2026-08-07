@@ -1,0 +1,5 @@
+# Ignore local editor / OS noise (catalog + scripts are tracked).
+.DS_Store
+Thumbs.db
+*.swp
+*~

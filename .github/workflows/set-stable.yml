@@ -12,7 +12,7 @@ on:
         options: [win32, linux]
         required: true
       version:
-        description: Build number already present in the catalog
+        description: Build id already present in the catalog
         type: string
         required: true
 
@@ -25,14 +25,18 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - run: |
+      - name: Pin stable
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
           chmod +x .github/scripts/*.sh
           .github/scripts/set-stable.sh \
             "${{ inputs.product }}" \
             "${{ inputs.platform }}" \
             "${{ inputs.version }}"
 
-      - run: |
+      - name: Commit
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add versions/

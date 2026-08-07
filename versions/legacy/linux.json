@@ -1,7 +1,7 @@
 {
   "product": "legacy",
   "platform": "linux",
-  "latest": "34569",
+  "latest": "34629",
   "stable": null,
   "builds": {
     "33230": {
@@ -10,7 +10,7 @@
     },
     "25770": {
       "url": "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/25770-8ddccd4e4dfd6a760ce18651656463f961cc4761/fx.tar.xz",
-      "seenAt": "2026-08-07T02:32:17Z"
+      "seenAt": "2026-08-07T16:02:31Z"
     },
     "33746": {
       "url": "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/33746-29b07b8aab4a01945a759525d1b60643c734c069/fx.tar.xz",
@@ -20,9 +20,9 @@
       "url": "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/33864-e4f3713f5a45189ea900f34ef8c8d9cb9e13bd10/fx.tar.xz",
       "seenAt": "2026-08-06T02:21:54Z"
     },
-    "34569": {
-      "url": "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/feature/redm-key-mapping/34569-4bea6bf538d8b599cc73eccedf297ddbc8a76aee/fx.tar.xz",
-      "seenAt": "2026-08-07T02:32:17Z"
+    "34629": {
+      "url": "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/34629-cb3c120b0a46c07ff1513cb0cbf8c4b4b38fb05b/fx.tar.xz",
+      "seenAt": "2026-08-07T16:02:31Z"
     }
   }
 }

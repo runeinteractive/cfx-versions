@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# sync.sh — discover all channels, update versions/*.json + index.json (no downloads)
+# sync.sh — discover channels, update versions/*.json + index.json (no downloads)
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 cd "$ROOT"
@@ -10,13 +10,23 @@ need date
 
 now="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 changed=0
+SCRIPTS="$(dirname "$0")"
+
+write_if_changed() {
+  local file="$1" tmp="$2" msg="$3"
+  if ! cmp -s "$file" "$tmp"; then
+    mv "$tmp" "$file"
+    changed=1
+    echo "$msg"
+  else
+    rm -f "$tmp"
+  fi
+}
 
 upsert() {
   local product="$1" platform="$2" version="$3" url="$4"
-  local file
+  local file tmp
   file="$(channel_file "$product" "$platform")"
-
-  local tmp
   tmp="$(mktemp)"
   jq \
     --arg version "$version" \
@@ -29,7 +39,6 @@ upsert() {
           + { url: $url, seenAt: $seenAt }
         )
     ' "$file" >"$tmp"
-
   if ! cmp -s "$file" "$tmp"; then
     mv "$tmp" "$file"
     changed=1
@@ -40,16 +49,19 @@ upsert() {
   fi
 }
 
-# Also record Legacy recommended (often differs from latest).
+# Record Cfx "recommended" when it is a master build (does not change .latest).
 upsert_legacy_recommended() {
   local platform="$1"
-  local data version url
+  local data version url file tmp
   data="$(curl -fsSL "https://changelogs-live.fivem.net/api/changelog/versions/${platform}/server")"
   version="$(echo "$data" | jq -r '.recommended // empty')"
   url="$(echo "$data" | jq -r '.recommended_download // empty')"
   [[ -n "$version" && -n "$url" ]] || return 0
+  if ! is_master_url "$url"; then
+    echo "skip legacy/$platform recommended $version (not master)"
+    return 0
+  fi
 
-  local file tmp
   file="$(channel_file legacy "$platform")"
   tmp="$(mktemp)"
   jq \
@@ -62,52 +74,50 @@ upsert_legacy_recommended() {
         + { url: $url, seenAt: $seenAt }
       )
     ' "$file" >"$tmp"
+  write_if_changed "$file" "$tmp" "recorded legacy/$platform recommended $version"
+}
 
-  if ! cmp -s "$file" "$tmp"; then
-    mv "$tmp" "$file"
-    changed=1
-    echo "recorded legacy/$platform recommended $version"
-  else
-    rm -f "$tmp"
-  fi
+prune_legacy_non_master() {
+  local platform="$1"
+  local file tmp
+  file="$(channel_file legacy "$platform")"
+  tmp="$(mktemp)"
+  jq '
+    .builds |= with_entries(select(.value.url | test("/master/")))
+    | ( [.builds | keys[] | select(test("^[0-9]+$")) | tonumber] | max? // empty | tostring ) as $max
+    | if ($max != "" and (.builds[.latest] | not)) then .latest = $max else . end
+  ' "$file" >"$tmp"
+  write_if_changed "$file" "$tmp" "pruned non-master builds from legacy/$platform"
 }
 
 for product in legacy enhanced; do
   for platform in win32 linux; do
-    line="$("$(dirname "$0")/discover.sh" "$product" "$platform")"
+    line="$("$SCRIPTS/discover.sh" "$product" "$platform")"
     version="${line%%$'\t'*}"
     url="${line#*$'\t'}"
+    if [[ "$product" == legacy ]] && ! is_master_url "$url"; then
+      echo "refusing non-master legacy URL: $url" >&2
+      exit 1
+    fi
     upsert "$product" "$platform" "$version" "$url"
   done
 done
 
 upsert_legacy_recommended win32
 upsert_legacy_recommended linux
+prune_legacy_non_master win32
+prune_legacy_non_master linux
 
-# Rebuild index summary
-tmp="$(mktemp)"
-jq -n \
-  --arg updatedAt "$now" \
-  --argjson lw "$(jq '{latest,stable}' versions/legacy/win32.json)" \
-  --argjson ll "$(jq '{latest,stable}' versions/legacy/linux.json)" \
-  --argjson ew "$(jq '{latest,stable}' versions/enhanced/win32.json)" \
-  --argjson el "$(jq '{latest,stable}' versions/enhanced/linux.json)" \
-  '{
-    updatedAt: $updatedAt,
-    channels: {
-      "legacy/win32": ($lw + {path: "versions/legacy/win32.json"}),
-      "legacy/linux": ($ll + {path: "versions/legacy/linux.json"}),
-      "enhanced/win32": ($ew + {path: "versions/enhanced/win32.json"}),
-      "enhanced/linux": ($el + {path: "versions/enhanced/linux.json"})
-    }
-  }' >"$tmp"
-
-if ! cmp -s versions/index.json "$tmp"; then
-  mv "$tmp" versions/index.json
+prev_index="$(mktemp)"
+cp versions/index.json "$prev_index"
+write_index "$now"
+if ! cmp -s "$prev_index" versions/index.json; then
   changed=1
 else
-  rm -f "$tmp"
+  # restore mtime-friendly: file identical
+  :
 fi
+rm -f "$prev_index"
 
 if [[ "$changed" -eq 1 ]]; then
   echo "catalog changed"

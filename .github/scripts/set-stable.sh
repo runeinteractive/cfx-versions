@@ -5,6 +5,7 @@ ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 cd "$ROOT"
 source "$(dirname "$0")/common.sh"
 need jq
+need date
 
 product="${1:?}"
 platform="${2:?}"
@@ -18,27 +19,17 @@ jq -e --arg v "$version" '.builds[$v] != null' "$file" >/dev/null || {
   exit 1
 }
 
+if [[ "$product" == legacy ]]; then
+  url="$(jq -r --arg v "$version" '.builds[$v].url // empty' "$file")"
+  if ! is_master_url "$url"; then
+    echo "refusing stable pin: $version is not a master URL" >&2
+    exit 1
+  fi
+fi
+
 tmp="$(mktemp)"
 jq --arg v "$version" '.stable = $v' "$file" >"$tmp"
 mv "$tmp" "$file"
 
-now="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-tmp="$(mktemp)"
-jq -n \
-  --arg updatedAt "$now" \
-  --argjson lw "$(jq '{latest,stable}' versions/legacy/win32.json)" \
-  --argjson ll "$(jq '{latest,stable}' versions/legacy/linux.json)" \
-  --argjson ew "$(jq '{latest,stable}' versions/enhanced/win32.json)" \
-  --argjson el "$(jq '{latest,stable}' versions/enhanced/linux.json)" \
-  '{
-    updatedAt: $updatedAt,
-    channels: {
-      "legacy/win32": ($lw + {path: "versions/legacy/win32.json"}),
-      "legacy/linux": ($ll + {path: "versions/legacy/linux.json"}),
-      "enhanced/win32": ($ew + {path: "versions/enhanced/win32.json"}),
-      "enhanced/linux": ($el + {path: "versions/enhanced/linux.json"})
-    }
-  }' >"$tmp"
-mv "$tmp" versions/index.json
-
+write_index "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 echo "stable $product/$platform → $version"
