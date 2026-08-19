@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-08-18T01:03:58Z",
+  "updatedAt": "2026-08-19T01:04:21Z",
   "channels": {
     "legacy/win32": {
-      "latest": "34833",
+      "latest": "35145",
       "stable": null,
       "path": "versions/legacy/win32.json"
     },
     "legacy/linux": {
-      "latest": "34833",
+      "latest": "35145",
       "stable": null,
       "path": "versions/legacy/linux.json"
     },
