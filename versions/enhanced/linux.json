@@ -1,57 +1,10 @@
 {
+  "schemaVersion": 1,
   "product": "enhanced",
   "platform": "linux",
   "latest": "129",
   "stable": null,
   "builds": {
-    "96": {
-      "url": "https://downloads.cfx-services.net/prod/019f9529-ccf6-7142-99bd-5a6e35546a00/cfx-server_linux_x64.tar.xz",
-      "seenAt": "2026-07-27T02:40:36Z"
-    },
-    "98": {
-      "url": "https://downloads.cfx-services.net/prod/019fa476-84f5-7438-b85a-25b3efd137fa/cfx-server_linux_x64.tar.xz",
-      "seenAt": "2026-07-29T02:25:15Z"
-    },
-    "103": {
-      "url": "https://downloads.cfx-services.net/prod/019faeab-a5fa-7020-a208-c343cb3d6ebe/cfx-server_linux_x64.tar.xz",
-      "seenAt": "2026-07-30T02:07:01Z"
-    },
-    "105": {
-      "url": "https://downloads.cfx-services.net/prod/019fb3d1-c8d1-7bcc-88f4-aed2f2a3f4ea/cfx-server_linux_x64.tar.xz",
-      "seenAt": "2026-07-31T02:34:54Z"
-    },
-    "106": {
-      "url": "https://downloads.cfx-services.net/prod/019fb938-e826-712f-8dec-71f3a32728bc/cfx-server_linux_x64.tar.xz",
-      "seenAt": "2026-08-03T02:34:25Z"
-    },
-    "107": {
-      "url": "https://downloads.cfx-services.net/prod/019fc7df-a2ad-76aa-866a-92f4c228ef7b/cfx-server_linux_x64.tar.xz",
-      "seenAt": "2026-08-04T02:13:30Z"
-    },
-    "110": {
-      "url": "https://downloads.cfx-services.net/prod/019fcd54-6315-7184-a0d7-dac76fdd08a7/cfx-server_linux_x64.tar.xz",
-      "seenAt": "2026-08-06T02:21:54Z"
-    },
-    "111": {
-      "url": "https://downloads.cfx-services.net/prod/019fd73d-2f04-7396-a264-663732007f14/cfx-server_linux_x64.tar.xz",
-      "seenAt": "2026-08-11T01:25:50Z"
-    },
-    "115": {
-      "url": "https://downloads.cfx-services.net/prod/019ff139-e861-7589-a912-577a01ad8ac1/cfx-server_linux_x64.tar.xz",
-      "seenAt": "2026-08-12T01:43:23Z"
-    },
-    "118": {
-      "url": "https://downloads.cfx-services.net/prod/019ff6a2-f58a-7ad1-8caa-bb9af3fd458a/cfx-server_linux_x64.tar.xz",
-      "seenAt": "2026-08-13T01:45:38Z"
-    },
-    "119": {
-      "url": "https://downloads.cfx-services.net/prod/019ffb4d-b63e-7b39-bd95-31986c0f786f/cfx-server_linux_x64.tar.xz",
-      "seenAt": "2026-08-19T01:04:21Z"
-    },
-    "127": {
-      "url": "https://downloads.cfx-services.net/prod/01a01a2a-e75b-7751-8c57-ce25fb55abf9/cfx-server_linux_x64.tar.xz",
-      "seenAt": "2026-08-20T01:04:14Z"
-    },
     "129": {
       "url": "https://downloads.cfx-services.net/prod/01a01f0e-90e9-75b8-9433-7cd4523efc60/cfx-server_linux_x64.tar.xz",
       "seenAt": "2026-08-21T01:07:39Z"

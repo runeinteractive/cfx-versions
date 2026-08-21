@@ -1,10 +1,18 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCHEMA_VERSION=1
+PRODUCTS=(legacy enhanced)
+PLATFORMS=(win32 linux)
+
 need() { command -v "$1" >/dev/null || { echo "missing: $1" >&2; exit 1; }; }
 
 channel_file() {
   echo "versions/$1/$2.json"
+}
+
+channel_key() {
+  echo "$1/$2"
 }
 
 # Legacy FXServer: only …/master/… (never feature/*).
@@ -48,25 +56,68 @@ legacy_master_folder_from_stdin() {
   printf '%s\n' "$folder"
 }
 
+policy_min_build() {
+  local product="$1"
+  jq -r --arg p "$product" '.retention[$p].minBuild // empty' versions/policy.json
+}
+
 # Rewrite versions/index.json from channel files. Arg: ISO-8601 UTC timestamp.
 write_index() {
   local updatedAt="$1"
-  local tmp
+  local tmp product platform key file
   tmp="$(mktemp)"
+
   jq -n \
+    --argjson schemaVersion "$SCHEMA_VERSION" \
     --arg updatedAt "$updatedAt" \
-    --argjson lw "$(jq '{latest,stable}' versions/legacy/win32.json)" \
-    --argjson ll "$(jq '{latest,stable}' versions/legacy/linux.json)" \
-    --argjson ew "$(jq '{latest,stable}' versions/enhanced/win32.json)" \
-    --argjson el "$(jq '{latest,stable}' versions/enhanced/linux.json)" \
-    '{
-      updatedAt: $updatedAt,
-      channels: {
-        "legacy/win32": ($lw + {path: "versions/legacy/win32.json"}),
-        "legacy/linux": ($ll + {path: "versions/legacy/linux.json"}),
-        "enhanced/win32": ($ew + {path: "versions/enhanced/win32.json"}),
-        "enhanced/linux": ($el + {path: "versions/enhanced/linux.json"})
-      }
-    }' >"$tmp"
-  mv "$tmp" versions/index.json
+    '{ schemaVersion: $schemaVersion, updatedAt: $updatedAt, channels: {} }' >"$tmp"
+
+  for product in "${PRODUCTS[@]}"; do
+    for platform in "${PLATFORMS[@]}"; do
+      key="$(channel_key "$product" "$platform")"
+      file="$(channel_file "$product" "$platform")"
+      jq \
+        --arg key "$key" \
+        --arg path "$file" \
+        --argjson meta "$(jq '{latest, stable}' "$file")" \
+        '.channels[$key] = ($meta + {path: $path})' \
+        "$tmp" >"${tmp}.next"
+      mv "${tmp}.next" "$tmp"
+    done
+  done
+
+  # Stable key order for deterministic diffs.
+  jq -S . "$tmp" >"${tmp}.sorted"
+  mv "${tmp}.sorted" versions/index.json
+  rm -f "$tmp"
+}
+
+# Keep builds >= minBuild, plus latest/stable pins. Sorted keys for clean diffs.
+prune_retention() {
+  local product="$1" platform="$2"
+  local file min tmp
+  file="$(channel_file "$product" "$platform")"
+  min="$(policy_min_build "$product")"
+  [[ -n "$min" ]] || return 0
+
+  tmp="$(mktemp)"
+  jq \
+    --argjson min "$min" \
+    '
+      . as $root
+      | .builds |= (
+          with_entries(
+            select(
+              (.key | test("^[0-9]+$") | not)
+              or (.key | tonumber) >= $min
+              or .key == $root.latest
+              or (.key == $root.stable)
+            )
+          )
+          | to_entries
+          | sort_by(.key | tonumber)
+          | from_entries
+        )
+    ' "$file" >"$tmp"
+  mv "$tmp" "$file"
 }

@@ -1,0 +1,29 @@
+name: Validate catalog
+
+on:
+  pull_request:
+    paths:
+      - 'versions/**'
+      - '.github/scripts/**'
+  push:
+    branches: [main]
+    paths:
+      - 'versions/**'
+      - '.github/scripts/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Validate
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+          chmod +x .github/scripts/*.sh
+          .github/scripts/validate.sh

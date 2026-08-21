@@ -29,11 +29,13 @@ upsert() {
   file="$(channel_file "$product" "$platform")"
   tmp="$(mktemp)"
   jq \
+    --argjson schemaVersion "$SCHEMA_VERSION" \
     --arg version "$version" \
     --arg url "$url" \
     --arg seenAt "$now" \
     '
-      .latest = $version
+      .schemaVersion = $schemaVersion
+      | .latest = $version
       | .builds[$version] = (
           (.builds[$version] // {})
           + { url: $url, seenAt: $seenAt }
@@ -42,7 +44,7 @@ upsert() {
   if ! cmp -s "$file" "$tmp"; then
     mv "$tmp" "$file"
     changed=1
-    echo "updated $product/$platform → $version"
+    echo "updated $product/$platform -> $version"
   else
     rm -f "$tmp"
     echo "unchanged $product/$platform ($version)"
@@ -90,8 +92,8 @@ prune_legacy_non_master() {
   write_if_changed "$file" "$tmp" "pruned non-master builds from legacy/$platform"
 }
 
-for product in legacy enhanced; do
-  for platform in win32 linux; do
+for product in "${PRODUCTS[@]}"; do
+  for platform in "${PLATFORMS[@]}"; do
     line="$("$SCRIPTS/discover.sh" "$product" "$platform")"
     version="${line%%$'\t'*}"
     url="${line#*$'\t'}"
@@ -108,16 +110,28 @@ upsert_legacy_recommended linux
 prune_legacy_non_master win32
 prune_legacy_non_master linux
 
+for product in "${PRODUCTS[@]}"; do
+  for platform in "${PLATFORMS[@]}"; do
+    file="$(channel_file "$product" "$platform")"
+    before="$(cksum <"$file" | awk '{print $1" "$2}')"
+    prune_retention "$product" "$platform"
+    after="$(cksum <"$file" | awk '{print $1" "$2}')"
+    if [[ "$before" != "$after" ]]; then
+      changed=1
+      echo "pruned retention $product/$platform (minBuild $(policy_min_build "$product"))"
+    fi
+  done
+done
+
 prev_index="$(mktemp)"
 cp versions/index.json "$prev_index"
 write_index "$now"
 if ! cmp -s "$prev_index" versions/index.json; then
   changed=1
-else
-  # restore mtime-friendly: file identical
-  :
 fi
 rm -f "$prev_index"
+
+"$SCRIPTS/validate.sh"
 
 if [[ "$changed" -eq 1 ]]; then
   echo "catalog changed"

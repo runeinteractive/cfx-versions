@@ -1,57 +1,10 @@
 {
+  "schemaVersion": 1,
   "product": "enhanced",
   "platform": "win32",
   "latest": "129",
   "stable": null,
   "builds": {
-    "96": {
-      "url": "https://downloads.cfx-services.net/prod/019f9529-c376-726f-bf98-cec04960f555/cfx-server_win_x64.zip",
-      "seenAt": "2026-07-27T02:40:36Z"
-    },
-    "98": {
-      "url": "https://downloads.cfx-services.net/prod/019fa476-7ad2-74a6-bec6-13364a78cf3c/cfx-server_win_x64.zip",
-      "seenAt": "2026-07-29T02:25:15Z"
-    },
-    "103": {
-      "url": "https://downloads.cfx-services.net/prod/019faeab-9d10-7691-bc20-eaaadf0c6829/cfx-server_win_x64.zip",
-      "seenAt": "2026-07-30T02:07:01Z"
-    },
-    "105": {
-      "url": "https://downloads.cfx-services.net/prod/019fb3d1-bed9-78ec-9023-38605db0adab/cfx-server_win_x64.zip",
-      "seenAt": "2026-07-31T02:34:54Z"
-    },
-    "106": {
-      "url": "https://downloads.cfx-services.net/prod/019fb938-de55-7de9-af99-51ef2bbd8adc/cfx-server_win_x64.zip",
-      "seenAt": "2026-08-03T02:34:25Z"
-    },
-    "107": {
-      "url": "https://downloads.cfx-services.net/prod/019fc7df-8e79-73c1-8467-f444ab5fcadf/cfx-server_win_x64.zip",
-      "seenAt": "2026-08-04T02:13:30Z"
-    },
-    "110": {
-      "url": "https://downloads.cfx-services.net/prod/019fcd54-4e86-7821-9739-71d9b8e24a27/cfx-server_win_x64.zip",
-      "seenAt": "2026-08-06T02:21:54Z"
-    },
-    "111": {
-      "url": "https://downloads.cfx-services.net/prod/019fd73d-0bfe-7063-8aab-796108a0df9a/cfx-server_win_x64.zip",
-      "seenAt": "2026-08-11T01:25:50Z"
-    },
-    "115": {
-      "url": "https://downloads.cfx-services.net/prod/019ff139-d398-7aed-a3e9-9ffaf2cfec38/cfx-server_win_x64.zip",
-      "seenAt": "2026-08-12T01:43:23Z"
-    },
-    "118": {
-      "url": "https://downloads.cfx-services.net/prod/019ff6a2-e092-70d8-8e18-81400a211b4a/cfx-server_win_x64.zip",
-      "seenAt": "2026-08-13T01:45:38Z"
-    },
-    "119": {
-      "url": "https://downloads.cfx-services.net/prod/019ffb4d-a005-7aac-8e81-45a79fb05d4b/cfx-server_win_x64.zip",
-      "seenAt": "2026-08-19T01:04:21Z"
-    },
-    "127": {
-      "url": "https://downloads.cfx-services.net/prod/01a01a2a-d196-7900-aa27-125a972270bf/cfx-server_win_x64.zip",
-      "seenAt": "2026-08-20T01:04:14Z"
-    },
     "129": {
       "url": "https://downloads.cfx-services.net/prod/01a01f0e-7471-722b-a8ec-9a1827a4fdee/cfx-server_win_x64.zip",
       "seenAt": "2026-08-21T01:07:39Z"

@@ -40,5 +40,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add versions/
-          git commit -m "chore(versions): stable ${{ inputs.product }}/${{ inputs.platform }} → ${{ inputs.version }}"
+          git commit -m "chore(versions): stable ${{ inputs.product }}/${{ inputs.platform }} -> ${{ inputs.version }}"
           git push

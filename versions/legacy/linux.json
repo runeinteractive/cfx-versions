@@ -1,47 +1,16 @@
 {
+  "schemaVersion": 1,
   "product": "legacy",
   "platform": "linux",
   "latest": "35265",
-  "stable": null,
+  "stable": "35245",
   "builds": {
-    "33230": {
-      "url": "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/33230-ba45c32ba5782c784feb939fdf921961b00d9c3f/fx.tar.xz",
-      "seenAt": "2026-07-27T02:40:36Z"
-    },
-    "25770": {
-      "url": "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/25770-8ddccd4e4dfd6a760ce18651656463f961cc4761/fx.tar.xz",
-      "seenAt": "2026-08-20T01:04:14Z"
-    },
-    "33746": {
-      "url": "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/33746-29b07b8aab4a01945a759525d1b60643c734c069/fx.tar.xz",
-      "seenAt": "2026-07-28T02:21:18Z"
-    },
-    "33864": {
-      "url": "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/33864-e4f3713f5a45189ea900f34ef8c8d9cb9e13bd10/fx.tar.xz",
-      "seenAt": "2026-08-06T02:21:54Z"
-    },
-    "34629": {
-      "url": "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/34629-cb3c120b0a46c07ff1513cb0cbf8c4b4b38fb05b/fx.tar.xz",
-      "seenAt": "2026-08-11T01:25:50Z"
-    },
-    "34833": {
-      "url": "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/34833-68c152444ad75b65017d6e6a56b59b9ef233dc59/fx.tar.xz",
-      "seenAt": "2026-08-18T01:03:58Z"
-    },
-    "35145": {
-      "url": "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/35145-767ee0bec87ebfb8291ac7c629b417f205e28129/fx.tar.xz",
-      "seenAt": "2026-08-19T01:04:21Z"
-    },
-    "35214": {
-      "url": "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/35214-f5a29190639b9a4722c1d5cde9f03a9ced5d2677/fx.tar.xz",
-      "seenAt": "2026-08-20T01:04:14Z"
+    "35245": {
+      "url": "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/35245-6efb47dff473c0e2a12fb50b08d74c0eb24a50d5/fx.tar.xz",
+      "seenAt": "2026-08-21T01:07:39Z"
     },
     "35265": {
       "url": "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/35265-f26e3aacb0f6fe8a8c76227a79688b0853dadb45/fx.tar.xz",
-      "seenAt": "2026-08-21T01:07:39Z"
-    },
-    "35245": {
-      "url": "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/35245-6efb47dff473c0e2a12fb50b08d74c0eb24a50d5/fx.tar.xz",
       "seenAt": "2026-08-21T01:07:39Z"
     }
   }

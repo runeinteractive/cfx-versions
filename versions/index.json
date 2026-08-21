@@ -1,25 +1,26 @@
 {
-  "updatedAt": "2026-08-21T01:07:39Z",
   "channels": {
-    "legacy/win32": {
-      "latest": "35265",
-      "stable": null,
-      "path": "versions/legacy/win32.json"
-    },
-    "legacy/linux": {
-      "latest": "35265",
-      "stable": null,
-      "path": "versions/legacy/linux.json"
+    "enhanced/linux": {
+      "latest": "129",
+      "path": "versions/enhanced/linux.json",
+      "stable": null
     },
     "enhanced/win32": {
       "latest": "129",
-      "stable": null,
-      "path": "versions/enhanced/win32.json"
+      "path": "versions/enhanced/win32.json",
+      "stable": null
     },
-    "enhanced/linux": {
-      "latest": "129",
-      "stable": null,
-      "path": "versions/enhanced/linux.json"
+    "legacy/linux": {
+      "latest": "35265",
+      "path": "versions/legacy/linux.json",
+      "stable": "35245"
+    },
+    "legacy/win32": {
+      "latest": "35265",
+      "path": "versions/legacy/win32.json",
+      "stable": "35245"
     }
-  }
+  },
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-21T01:07:39Z"
 }
