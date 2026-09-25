@@ -1,12 +1,12 @@
 {
   "channels": {
     "enhanced/linux": {
-      "latest": "153",
+      "latest": "156",
       "path": "versions/enhanced/linux.json",
       "stable": null
     },
     "enhanced/win32": {
-      "latest": "153",
+      "latest": "156",
       "path": "versions/enhanced/win32.json",
       "stable": null
     },
@@ -22,5 +22,5 @@
     }
   },
   "schemaVersion": 1,
-  "updatedAt": "2026-09-24T03:06:26Z"
+  "updatedAt": "2026-09-25T03:22:59Z"
 }
