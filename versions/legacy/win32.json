@@ -7,7 +7,7 @@
   "builds": {
     "35245": {
       "url": "https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/35245-6efb47dff473c0e2a12fb50b08d74c0eb24a50d5/server.zip",
-      "seenAt": "2026-09-29T04:10:40Z"
+      "seenAt": "2026-09-30T03:56:18Z"
     },
     "35265": {
       "url": "https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/35265-f26e3aacb0f6fe8a8c76227a79688b0853dadb45/server.zip",
@@ -39,7 +39,7 @@
     },
     "36727": {
       "url": "https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/36727-e60d29ac2d6e894e20ba78d5fdf3c190d976fd2a/server.zip",
-      "seenAt": "2026-09-29T04:10:40Z"
+      "seenAt": "2026-09-30T03:56:18Z"
     }
   }
 }
